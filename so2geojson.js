@@ -78,7 +78,7 @@ function GeoShapeToGeometry(shp) {
   	geom.type = "Polygon";
     geom.coordinates = boxToPolygon(shp.box, elev);
   } else if ("circle" in shp) {
-  
+    //TODO: circles are funky in geojson
   } else if ("polygon" in shp) {
   	geom.type = "Polygon";
     geom.coordinates = schemaCoordStringToPolygon(shp.line, elev);
@@ -112,6 +112,8 @@ function placeToGeoJSON(place) {
     properties:{},
     geometry:{}
   }
+  //TODO: place may itself have latitude, longitude etc, though
+  //oddly, no elevation....
   if (place.geo["@type"] === "GeoShape") {
     feat.geometry = GeoShapeToGeometry(place.geo)
   } else if (place.geo["@type"] === "GeoCoordinates") {
